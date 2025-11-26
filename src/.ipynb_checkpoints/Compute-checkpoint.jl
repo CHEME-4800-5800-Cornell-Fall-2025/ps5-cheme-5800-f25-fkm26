@@ -105,24 +105,8 @@ function mysolve(model::MyValueIterationModel, problem::MyMDPProblemModel; ϵ::F
     Uold = zeros(Float64, number_of_states); # temporary storage for old value function
 
     # TODO: Implement the value iteration with convergence checking algorithm
-    while converged == false # while not converged 
-        
-        Uold = copy(U) # define Uold as previous state
-        U = [_backup(problem, Uold, s) for s ∈ problem.𝒮]; # define new state
+    throw(ErrorError("Oooops!: You need to implement the value iteration with convergence checking algorithm!"))
 
-        if maximum(abs.(U .- Uold)) ≤ ϵ # if the maximum of the absolute value of the difference between the elements
-            # in the current state minus the previous state is less than or equal to epsilon
-            converged = true; # stop loop and best state is current state
-        else 
-            counter += 1 # otherwise increment counter and continue loop
-        end
-
-        if counter ≥ k_max # if the maximum number of iterations is reached
-            converged = true; # stop loop
-        end
-    end
-    # throw(ErrorError("Oooops!: You need to implement the value iteration with convergence checking algorithm!"))
-    # chatGPT used for troubleshooting
     return MyValueIterationSolution(problem, U); # wrap and return
 end
 
